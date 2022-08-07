@@ -28,10 +28,10 @@ export interface foodAndDrinksType {
 
 export interface InitialState {
     foodAndDrinks : Array<foodAndDrinksType>,
-    loading: boolean
+    loading: boolean,
 }
 
 export const initialState : InitialState = {
     foodAndDrinks: [],
-    loading: false
+    loading: false,
 }

@@ -4,6 +4,7 @@ import { useStateValue } from '../Redux/StateProvider';
 import OptionsMenu from './OptionsMenu';
 import ResultsContainer from './ResultsContainer';
 import emptyResults from '../Img/emptyResults.png'
+import SearchContainer from './SearchContainer';
 
 const MainPage : React.FC = () => {
 
@@ -21,8 +22,11 @@ const MainPage : React.FC = () => {
                 </div>
             </div>
             <OptionsMenu />
+            <div className='w-full h-full'>
+            <SearchContainer />
+            </div>
             <div className='w-full'> 
-            {loading ? <p>Loading...</p> : foodAndDrinks.length > 0 ? (
+            {loading ? <p>Loading...</p> : foodAndDrinks?.length > 0 ? (
                 <ResultsContainer data={foodAndDrinks} />
             ): 
             <div className='w-full flex items-center justify-center py-14'>

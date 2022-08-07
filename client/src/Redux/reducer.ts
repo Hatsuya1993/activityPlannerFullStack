@@ -1,14 +1,14 @@
-import { foodAndDrinksType, InitialState } from "./initialState";
+import { coordinatesType, foodAndDrinksType, InitialState } from "./initialState";
 
 interface ActionType {
     type: string
     foodAndDrinks: foodAndDrinksType
-    loading: boolean
+    loading: boolean,
 }
 
 export const actionType = {
     SET_FOOD_AND_DRINKS : 'SET_FOOD_AND_DRINKS',
-    SET_LOADING: 'SET_LOADING'
+    SET_LOADING: 'SET_LOADING',
 }
 
 export const reducer = (state: InitialState, action: ActionType) => {
