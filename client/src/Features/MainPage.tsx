@@ -1,10 +1,15 @@
 import React from 'react'
 import { useAuth } from '../Context/authContext'
+import { useStateValue } from '../Redux/StateProvider';
 import OptionsMenu from './OptionsMenu';
+import ResultsContainer from './ResultsContainer';
+import emptyResults from '../Img/emptyResults.png'
 
 const MainPage : React.FC = () => {
 
     const {currentUser} = useAuth()
+
+    const [{foodAndDrinks, loading}, dispatch] = useStateValue()
 
     return (
         <div className='w-full h-screen flex justify-center'>
@@ -16,6 +21,18 @@ const MainPage : React.FC = () => {
                 </div>
             </div>
             <OptionsMenu />
+            <div className='w-full'> 
+            {loading ? <p>Loading...</p> : foodAndDrinks.length > 0 ? (
+                <ResultsContainer data={foodAndDrinks} />
+            ): 
+            <div className='w-full flex items-center justify-center py-14'>
+            <div>
+            <p className='text-center text-2xl'>No Results</p>
+            <img className='w-80' src={emptyResults} alt="" />
+            </div>
+        </div>
+            }
+            </div>
             </div>
         </div>
     )
