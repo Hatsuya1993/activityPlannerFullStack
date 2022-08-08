@@ -1,3 +1,5 @@
+import { foodAndDrinksData } from "../Utils/Data"
+
 export interface coordinatesType {
     latitude: number,
     longitude: number
@@ -13,7 +15,7 @@ export interface locationType {
     state: string
 }
 
-export interface foodAndDrinksType {
+export interface yelpResponseType {
     id: string,
     name: string,
     image_url: string,
@@ -27,11 +29,29 @@ export interface foodAndDrinksType {
 }
 
 export interface InitialState {
-    foodAndDrinks : Array<foodAndDrinksType>,
+    currentPlan: Array<yelpResponseType>,
+    foodAndDrinks : Array<yelpResponseType>,
     loading: boolean,
+    hotels: Array<yelpResponseType>,
+    activities: Array<yelpResponseType>,
+    events: Array<yelpResponseType>
+    service: string,
+    setDropDown: {
+        data: Array<string>
+        service: string
+    }
 }
 
 export const initialState : InitialState = {
+    currentPlan: [],
     foodAndDrinks: [],
     loading: false,
+    events: [],
+    hotels: [],
+    activities: [],
+    service: '',
+    setDropDown: {
+        data: foodAndDrinksData,
+        service: 'food' 
+    }
 }

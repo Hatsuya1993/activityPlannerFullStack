@@ -10,7 +10,7 @@ const MainPage : React.FC = () => {
 
     const {currentUser} = useAuth()
 
-    const [{foodAndDrinks, loading}, dispatch] = useStateValue()
+    const [{loading, currentPlan}, dispatch] = useStateValue()
 
     return (
         <div className='w-full h-screen flex justify-center'>
@@ -26,8 +26,8 @@ const MainPage : React.FC = () => {
             <SearchContainer />
             </div>
             <div className='w-full'> 
-            {loading ? <p>Loading...</p> : foodAndDrinks?.length > 0 ? (
-                <ResultsContainer data={foodAndDrinks} />
+            {loading ? <p>Loading...</p> : currentPlan?.length > 0 ? (
+                <ResultsContainer data={currentPlan} />
             ): 
             <div className='w-full flex items-center justify-center py-14'>
             <div>

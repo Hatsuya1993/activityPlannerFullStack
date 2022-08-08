@@ -1,15 +1,15 @@
 import React from 'react'
-import { foodAndDrinksType } from '../Redux/initialState'
+import { yelpResponseType } from '../Redux/initialState'
 import {motion} from 'framer-motion'
 
 type ResultsContainerType = {
-    data: Array<foodAndDrinksType>
+    data: Array<yelpResponseType>
 }
 
 const ResultsContainer : React.FC<ResultsContainerType> = ({data}) => {
     return (
         <div className='w-full flex flex-col gap-7'>
-            {data && data.length > 0 && data.map((each: foodAndDrinksType) => {
+            {data && data.length > 0 && data.map((each: yelpResponseType) => {
                 return (
                     <motion.div whileTap={{scale: 0.75}} key={each.id} className='w-full bg-slate-100 p-3 h-36 rounded-lg drop-shadow-lg cursor-pointer'>
                         <div className='flex items-center justify-between'>
