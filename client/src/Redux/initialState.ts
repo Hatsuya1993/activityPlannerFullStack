@@ -28,7 +28,45 @@ export interface yelpResponseType {
     display_phone: string
 }
 
+export interface openingHours {
+    opens: string,
+    closes: string
+}
+
+export interface knowledge_graph {
+    hours: openingHours
+}
+
+export interface googleSearchResponse {
+    knowledge_graph: knowledge_graph
+}
+
+export interface searchMetaDataResponse {
+    google_maps_url: string 
+}
+
+export interface localResults {
+    data_id: string
+}
+
+export interface imagesResponse {
+    thumbnail: string
+}
+
+export interface placeResults {
+    images: Array<imagesResponse>
+}
+
+export interface googleSearchMapResponse {
+    search_metadata: searchMetaDataResponse
+    local_results: Array<localResults>
+    place_results: placeResults
+}
+
 export interface InitialState {
+    googleSearchMap: Array<googleSearchMapResponse>
+    googleSearchKnowledgeGraph: Array<googleSearchResponse>
+    detailSelected: Array<yelpResponseType>,
     currentPlan: Array<yelpResponseType>,
     foodAndDrinks : Array<yelpResponseType>,
     loading: boolean,
@@ -43,6 +81,9 @@ export interface InitialState {
 }
 
 export const initialState : InitialState = {
+    googleSearchMap: [],
+    googleSearchKnowledgeGraph: [],
+    detailSelected: [],
     currentPlan: [],
     foodAndDrinks: [],
     loading: false,

@@ -13,7 +13,7 @@ const MainPage : React.FC = () => {
     const [{loading, currentPlan}, dispatch] = useStateValue()
 
     return (
-        <div className='w-full h-screen flex justify-center'>
+        <div className='w-full flex justify-center pb-10'>
             <div className='flex flex-col gap-10'>
             <div className='shadow-lg bg-gray-100 w-[600px] h-[110px] rounded-lg'>
                 <div className='p-5 flex flex-col gap-2'>

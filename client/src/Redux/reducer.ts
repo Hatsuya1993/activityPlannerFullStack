@@ -1,13 +1,16 @@
-import { yelpResponseType, InitialState } from "./initialState";
+import { yelpResponseType, InitialState, googleSearchResponse, searchMetaDataResponse } from "./initialState";
 
 interface ActionType {
-    type: string
+    type: string,
     currentPlan: yelpResponseType
     foodAndDrinks: yelpResponseType
+    googleSearchResponseData: googleSearchResponse,
+    googleSearchMap: searchMetaDataResponse,
     loading: boolean,
     events: yelpResponseType,
     hotels: yelpResponseType,
     activities: yelpResponseType,
+    detailSelected: yelpResponseType,
     setDropDown: {
         data: Array<string>,
         service: string
@@ -15,6 +18,9 @@ interface ActionType {
 }
 
 export const actionType = {
+    SET_SEARCH_METADATA: 'SET_SEARCH_METADATA',
+    SET_OPENING_HOURS: 'SET_OPENING_HOURS',
+    SET_DETAIL_PAGE : 'SET_DETAIL_PAGE',
     SET_FOOD_AND_DRINKS : 'SET_FOOD_AND_DRINKS',
     SET_LOADING: 'SET_LOADING',
     SET_HOTELS: 'SET_HOTELS',
@@ -63,6 +69,21 @@ export const reducer = (state: InitialState, action: ActionType) => {
                     data: action.setDropDown.data,
                     service: action.setDropDown.service
                 }
+            }
+        case actionType.SET_DETAIL_PAGE:
+            return {
+                ...state,
+                detailSelected: action.detailSelected
+            }
+        case actionType.SET_OPENING_HOURS:
+            return {
+                ...state,
+                googleSearchResponseData: action.googleSearchResponseData
+            }
+        case actionType.SET_SEARCH_METADATA:
+            return {
+                ...state,
+                googleSearchMap: action.googleSearchMap
             }
         default:
             return state

@@ -9,6 +9,7 @@ import MainPage from './Features/MainPage';
 import { useStateValue } from './Redux/StateProvider';
 import { getAllFoodAndDrinks } from './Utils/fetchYelpApi';
 import { actionType } from './Redux/reducer';
+import DetailsPage from './Features/DetailsPage';
 
 const App : React.FC = () => {
   const [{}, dispatch] = useStateValue()
@@ -36,6 +37,7 @@ const App : React.FC = () => {
         <Routes>
           <Route path='/login' element={<LoginPage />} />
           <Route path='/' element={<RequireAuthComponent><MainPage /></RequireAuthComponent>} />
+          <Route path='/detail' element={<RequireAuthComponent><DetailsPage /></RequireAuthComponent>} />
         </Routes>
       </main>
       </div>
