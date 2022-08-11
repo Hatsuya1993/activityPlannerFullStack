@@ -36,7 +36,7 @@ export const getAllFoodAndDrinks = async (radius = 100, categories = 'any', lati
                 "x-requested-with": "xmlhttprequest",
                 "Access-Control-Allow-Origin": "*",
             }   
-        })    
+        })
         return data.data.businesses
     } catch (error) {
     console.log(error)

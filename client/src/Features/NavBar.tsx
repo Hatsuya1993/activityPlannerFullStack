@@ -27,7 +27,6 @@ const NavBar : React.FC = () => {
                 </motion.ul>
             </div>
             </div>
-            {/* Mobile */}
         </header>
     )
 }

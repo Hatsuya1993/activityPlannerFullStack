@@ -24,6 +24,10 @@ const App : React.FC = () => {
       foodAndDrinks: data
     })
     dispatch({
+      type: actionType.SET_CURRENT_PLAN,
+      currentPlan: data
+  })
+    dispatch({
       type: actionType.SET_LOADING,
       loading: false
     })

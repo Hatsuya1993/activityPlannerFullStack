@@ -7,7 +7,7 @@ import { useStateValue } from '../Redux/StateProvider';
 import { searchByMap, searchLocation } from '../Utils/fetchSearchGoogle';
 
 const DetailsPage : React.FC = () => {
-    const [{googleSearchResponseData, googleSearchMap}, dispatch] = useStateValue()
+    const [{googleSearchResponseData, googleSearchMap, loading}, dispatch] = useStateValue()
     const location = useLocation();
     const data : any = location.state;
     useEffect(() => {
@@ -16,12 +16,20 @@ const DetailsPage : React.FC = () => {
             let resp = await searchLocation(data.name)
             let respMap = await searchByMap(data.name, data.coordinates.latitude, data.coordinates.longitude)
             dispatch({
+                type: actionType.SET_LOADING,
+                loading: true
+            })
+            dispatch({
                 type: actionType.SET_OPENING_HOURS,
                 googleSearchResponseData: resp
             })
             dispatch({
                 type: actionType.SET_SEARCH_METADATA,
                 googleSearchMap: respMap
+            })
+            dispatch({
+                type: actionType.SET_LOADING,
+                loading: false
             })
         }
         fetchData();
@@ -39,7 +47,7 @@ const DetailsPage : React.FC = () => {
                             <li>
                             <p>Available : </p>
                             <div className='flex flex-col'>
-                            {googleSearchResponseData && googleSearchResponseData.knowledge_graph ? googleSearchResponseData.knowledge_graph.hours && Object.keys(googleSearchResponseData.knowledge_graph.hours).map((each) => (
+                            {loading ? <p>Loading...</p> : googleSearchResponseData && googleSearchResponseData.knowledge_graph ? googleSearchResponseData.knowledge_graph.hours && Object.keys(googleSearchResponseData.knowledge_graph.hours).map((each) => (
                                         <div>{each} : {googleSearchResponseData.knowledge_graph.hours[each].opens} - {googleSearchResponseData.knowledge_graph.hours[each].closes}</div>
                             )) : data.is_closed ? <p>Closed</p> : <p>Open</p>}
                             </div>

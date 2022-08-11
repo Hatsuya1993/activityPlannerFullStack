@@ -11,7 +11,7 @@ const MainPage : React.FC = () => {
     const {currentUser} = useAuth()
 
     const [{loading, currentPlan}, dispatch] = useStateValue()
-
+    
     return (
         <div className='w-full flex justify-center pb-10'>
             <div className='flex flex-col gap-10'>
