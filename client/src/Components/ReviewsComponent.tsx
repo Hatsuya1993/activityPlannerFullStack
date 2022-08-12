@@ -9,7 +9,6 @@ type ReviewsComponentType = {
 
 const ReviewsComponent : React.FC<ReviewsComponentType> = ({googleSearchReviews}) => {
     const [{loading}, dispatch] = useStateValue()
-    console.log(googleSearchReviews,1234)
     return (
         <div className='w-5/6 flex items-center mx-auto'>
             <div className='flex flex-col gap-3 w-full'>
