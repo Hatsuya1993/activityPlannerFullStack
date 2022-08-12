@@ -69,6 +69,7 @@ export interface userInfo {
 }
 
 export interface reviews {
+    date: string,
     data: string,
     likes: number,
     rating: number,

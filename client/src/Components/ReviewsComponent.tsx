@@ -19,6 +19,9 @@ const ReviewsComponent : React.FC<ReviewsComponentType> = ({googleSearchReviews}
                                 <li>
                                     {each.user.name}
                                 </li>
+                                <li>
+                                    Date : {each.date}
+                                </li>
                                 <li className='flex items-center gap-2'>
                                     <p>
                                     {each.likes ? <BsFillHandThumbsUpFill /> : <BsFillHandThumbsDownFill />}
