@@ -63,7 +63,25 @@ export interface googleSearchMapResponse {
     place_results: placeResults
 }
 
+export interface userInfo {
+    name: string,
+    thumbnail: string,
+}
+
+export interface reviews {
+    data: string,
+    likes: number,
+    rating: number,
+    snippet: string,
+    user: userInfo
+}
+
+export interface googleSearchReviewsResponse {
+    reviews: Array<reviews>
+}
+
 export interface InitialState {
+    googleSearchReviews: googleSearchReviewsResponse
     googleSearchMap: Array<googleSearchMapResponse>
     googleSearchKnowledgeGraph: Array<googleSearchResponse>
     detailSelected: Array<yelpResponseType>,
@@ -81,6 +99,9 @@ export interface InitialState {
 }
 
 export const initialState : InitialState = {
+    googleSearchReviews: {
+        reviews: []
+    },
     googleSearchMap: [],
     googleSearchKnowledgeGraph: [],
     detailSelected: [],

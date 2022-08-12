@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
 import ButtonComponent from '../Components/ButtonComponent';
+import ReviewsComponent from '../Components/ReviewsComponent';
 import RowComponents from '../Components/RowComponents';
 import { actionType } from '../Redux/reducer';
 import { useStateValue } from '../Redux/StateProvider';
-import { searchByMap, searchLocation } from '../Utils/fetchSearchGoogle';
+import { searchByMap, searchLocation, searchReviews } from '../Utils/fetchSearchGoogle';
 
 const DetailsPage : React.FC = () => {
-    const [{googleSearchResponseData, googleSearchMap, loading}, dispatch] = useStateValue()
+    const [{googleSearchResponseData, googleSearchMap, loading, googleSearchReviews}, dispatch] = useStateValue()
     const location = useLocation();
     const data : any = location.state;
     useEffect(() => {
@@ -15,6 +16,7 @@ const DetailsPage : React.FC = () => {
             searchLocation(data.name)
             let resp = await searchLocation(data.name)
             let respMap = await searchByMap(data.name, data.coordinates.latitude, data.coordinates.longitude)
+            let respRev = await searchReviews(respMap.place_results.data_id)
             dispatch({
                 type: actionType.SET_LOADING,
                 loading: true
@@ -26,6 +28,10 @@ const DetailsPage : React.FC = () => {
             dispatch({
                 type: actionType.SET_SEARCH_METADATA,
                 googleSearchMap: respMap
+            })
+            dispatch({
+                type: actionType.SET_SEARCH_REVIEWS,
+                googleSearchReviews: respRev
             })
             dispatch({
                 type: actionType.SET_LOADING,
@@ -76,7 +82,12 @@ const DetailsPage : React.FC = () => {
                 </div>
             </div>
         </div>
-            <RowComponents googleSearchMap={googleSearchMap}/>
+        <div>
+        <RowComponents googleSearchMap={googleSearchMap}/>
+        </div>
+        <div>
+            <ReviewsComponent googleSearchReviews={googleSearchReviews}/>
+        </div>
         </div>
     )
 }

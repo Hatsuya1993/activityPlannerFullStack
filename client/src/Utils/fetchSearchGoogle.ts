@@ -45,3 +45,18 @@ export const searchByMapPhotos = async (dataID: string) => {
         console.log(error)
     }
 }
+
+export const searchReviews = async (dataID : string) => {
+    try {
+        const data : any = await axios.get(`${CORS}https://serpapi.com/search.json?engine=google_maps_reviews&data_id=${dataID}&api_key=${GOOGLE_API}`, {
+            headers: {
+                "accept": "application/json",
+                "x-requested-with": "xmlhttprequest",
+                "Access-Control-Allow-Origin": "*",
+            }
+        })
+        return data.data
+    } catch (error) {
+        console.log(error)
+    }
+}
