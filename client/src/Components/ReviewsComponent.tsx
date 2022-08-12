@@ -9,6 +9,7 @@ type ReviewsComponentType = {
 
 const ReviewsComponent : React.FC<ReviewsComponentType> = ({googleSearchReviews}) => {
     const [{loading}, dispatch] = useStateValue()
+    console.log(googleSearchReviews,1234)
     return (
         <div className='w-5/6 flex items-center mx-auto'>
             <div className='flex flex-col gap-3 w-full'>
@@ -20,15 +21,14 @@ const ReviewsComponent : React.FC<ReviewsComponentType> = ({googleSearchReviews}
                                     {each.user.name}
                                 </li>
                                 <li>
-                                    Date : {each.date}
+                                    {each.date}
                                 </li>
                                 <li className='flex items-center gap-2'>
                                     <p>
-                                    {each.likes ? <BsFillHandThumbsUpFill /> : <BsFillHandThumbsDownFill />}
-                                    
+                                    <BsFillHandThumbsUpFill />
                                     </p>
                                     <p>
-                                    {each.likes}
+                                    {each.rating}
                                     </p>
                                 </li>
                                 <li>

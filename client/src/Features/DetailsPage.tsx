@@ -11,14 +11,13 @@ const DetailsPage : React.FC = () => {
     const [{googleSearchResponseData, googleSearchMap, loading, googleSearchReviews}, dispatch] = useStateValue()
     const location = useLocation();
     const data : any = location.state;
-    const [show, setShow] = React.useState(false)
     useEffect(() => {
         const timer = setTimeout(() => {
             dispatch({
                 type: actionType.SET_LOADING,
                 loading: false
             })
-        },8000)
+        },15000)
         return () => clearTimeout(timer)
     })
     useEffect(() => {
