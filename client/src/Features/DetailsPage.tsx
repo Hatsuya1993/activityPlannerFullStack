@@ -11,16 +11,38 @@ const DetailsPage : React.FC = () => {
     const [{googleSearchResponseData, googleSearchMap, loading, googleSearchReviews}, dispatch] = useStateValue()
     const location = useLocation();
     const data : any = location.state;
+    const [show, setShow] = React.useState(false)
     useEffect(() => {
+        const timer = setTimeout(() => {
+            dispatch({
+                type: actionType.SET_LOADING,
+                loading: false
+            })
+        },8000)
+        return () => clearTimeout(timer)
+    })
+    useEffect(() => {
+        
         async function fetchData() {
-            searchLocation(data.name)
-            let resp = await searchLocation(data.name)
-            let respMap = await searchByMap(data.name, data.coordinates.latitude, data.coordinates.longitude)
-            let respRev = await searchReviews(respMap.place_results.data_id)
             dispatch({
                 type: actionType.SET_LOADING,
                 loading: true
+            }) 
+            dispatch({
+                type: actionType.SET_OPENING_HOURS,
+                googleSearchResponseData: ''
             })
+            dispatch({
+                type: actionType.SET_SEARCH_METADATA,
+                googleSearchMap: ''
+            })
+            dispatch({
+                type: actionType.SET_SEARCH_REVIEWS,
+                googleSearchReviews: ''
+            })
+            let resp = await searchLocation(data.name)
+            let respMap = await searchByMap(data.name, data.coordinates.latitude, data.coordinates.longitude)
+            let respRev = await searchReviews(respMap.place_results.data_id)
             dispatch({
                 type: actionType.SET_OPENING_HOURS,
                 googleSearchResponseData: resp
@@ -54,7 +76,7 @@ const DetailsPage : React.FC = () => {
                             <p>Available : </p>
                             <div className='flex flex-col'>
                             {loading ? <p>Loading...</p> : googleSearchResponseData && googleSearchResponseData.knowledge_graph ? googleSearchResponseData.knowledge_graph.hours && Object.keys(googleSearchResponseData.knowledge_graph.hours).map((each) => (
-                                        <div>{each} : {googleSearchResponseData.knowledge_graph.hours[each].opens} - {googleSearchResponseData.knowledge_graph.hours[each].closes}</div>
+                                        <div className={each}>{each} : {googleSearchResponseData.knowledge_graph.hours[each].opens} - {googleSearchResponseData.knowledge_graph.hours[each].closes}</div>
                             )) : data.is_closed ? <p>Closed</p> : <p>Open</p>}
                             </div>
                             </li>
