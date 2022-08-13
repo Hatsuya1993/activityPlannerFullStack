@@ -81,7 +81,15 @@ export interface googleSearchReviewsResponse {
     reviews: Array<reviews>
 }
 
+export interface myPlanDataType {
+    data_id: string,
+    name: string,
+    latitude: number,
+    longitude: number
+}
+
 export interface InitialState {
+    myPlanData: Array<myPlanDataType>
     googleSearchReviews: googleSearchReviewsResponse
     googleSearchMap: Array<googleSearchMapResponse>
     googleSearchKnowledgeGraph: Array<googleSearchResponse>
@@ -100,6 +108,7 @@ export interface InitialState {
 }
 
 export const initialState : InitialState = {
+    myPlanData : [],
     googleSearchReviews: {
         reviews: []
     },

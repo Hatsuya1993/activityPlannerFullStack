@@ -34,3 +34,18 @@ export const postLocation = async (req: Request, res: Response) => {
         })
     }
 }
+
+export const deleteLocation = async (req: Request, res: Response) => {
+    const id = req.params.id
+    try {
+        await Location.findOneAndDelete({data_id: id})
+        res.json({
+            message: `Deleted location ${id} successfully`
+        })
+    } catch (error) {
+        res.status(400).json({
+            "Response": res.statusCode,
+            "Error message": error
+        })
+    }
+}

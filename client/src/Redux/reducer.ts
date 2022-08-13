@@ -1,6 +1,7 @@
-import { yelpResponseType, InitialState, googleSearchResponse, searchMetaDataResponse, googleSearchReviewsResponse } from "./initialState";
+import { yelpResponseType, InitialState, googleSearchResponse, searchMetaDataResponse, googleSearchReviewsResponse, myPlanDataType } from "./initialState";
 
 interface ActionType {
+    myPlanData: Array<myPlanDataType>,
     type: string,
     googleSearchReviews: googleSearchReviewsResponse,
     currentPlan: yelpResponseType
@@ -19,6 +20,7 @@ interface ActionType {
 }
 
 export const actionType = {
+    SET_MY_PLAN_DATA: 'SET_MY_PLAN_DATA',
     SET_SEARCH_REVIEWS: 'SET_SEARCH_REVIEWS',
     SET_SEARCH_METADATA: 'SET_SEARCH_METADATA',
     SET_OPENING_HOURS: 'SET_OPENING_HOURS',
@@ -91,6 +93,11 @@ export const reducer = (state: InitialState, action: ActionType) => {
             return {
                 ...state,
                 googleSearchReviews: action.googleSearchReviews
+            }
+        case actionType.SET_MY_PLAN_DATA:
+            return {
+                ...state,
+                myPlanData: action.myPlanData
             }
         default:
             return state

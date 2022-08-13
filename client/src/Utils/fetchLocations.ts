@@ -24,3 +24,11 @@ export const postLocation = async (info : LocationInterface) => {
         throw new Error(`${error}`)
     }    
 }
+
+export const deleteLocation = async (id: string) => {
+    try {
+        await axios.delete(`http://localhost:8200/deleteLocation/${id}`)
+    } catch (error) {
+        throw new Error(`${error}`)
+    }
+}
