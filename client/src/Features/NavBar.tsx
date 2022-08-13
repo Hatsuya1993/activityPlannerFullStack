@@ -22,9 +22,18 @@ const NavBar : React.FC = () => {
                 <p className='text-2xl font-semibold'>Activity Planner</p>
             </Link>
             <div>
-                <motion.ul className='flex items-center gap-4'>
+                <ul className='flex items-center gap-3'>
+                    <li>
+                    <motion.ul className='flex items-center gap-4'>
+                    {currentUser && <Link to={'/myPlan'}><li className='cursor-pointer text-base text-gray-400 hover:text-gray-500 transition-all duration-100 ease-in-out'>My Plan</li></Link>}
+                    </motion.ul>
+                    </li>
+                    <li>
+                    <motion.ul className='flex items-center gap-4'>
                     {currentUser && <li onClick={handleLogout} className='cursor-pointer text-base text-gray-400 hover:text-gray-500 transition-all duration-100 ease-in-out'>Logout</li>}
-                </motion.ul>
+                    </motion.ul>
+                    </li>
+                </ul>
             </div>
             </div>
         </header>

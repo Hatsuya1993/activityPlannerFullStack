@@ -5,10 +5,13 @@ import ReviewsComponent from '../Components/ReviewsComponent';
 import RowComponents from '../Components/RowComponents';
 import { actionType } from '../Redux/reducer';
 import { useStateValue } from '../Redux/StateProvider';
+import { getLocations, postLocation } from '../Utils/fetchLocations';
 import { searchByMap, searchLocation, searchReviews } from '../Utils/fetchSearchGoogle';
 
 const DetailsPage : React.FC = () => {
     const [{googleSearchResponseData, googleSearchMap, loading, googleSearchReviews}, dispatch] = useStateValue()
+    const [message, setMessage] = React.useState(false)
+    const [messageContent, setMessageContent] = React.useState('')
     const location = useLocation();
     const data : any = location.state;
     useEffect(() => {
@@ -21,7 +24,6 @@ const DetailsPage : React.FC = () => {
         return () => clearTimeout(timer)
     })
     useEffect(() => {
-        
         async function fetchData() {
             dispatch({
                 type: actionType.SET_LOADING,
@@ -61,10 +63,31 @@ const DetailsPage : React.FC = () => {
         }
         fetchData();
     }, [])
+
+    const handleAddPlan = async () => {
+        try {
+            await postLocation({name: data.name, latitude: data.coordinates.latitude, longitude: data.coordinates.longitude, data_id: googleSearchMap.place_results.data_id})
+            setMessage(true)
+            setMessageContent('Successfully added to plan')
+            setTimeout(() => {
+                setMessage(false)
+            }, 4000);
+        } catch (error) {
+            setMessage(true)
+            setMessageContent('Plan already added')
+            setTimeout(() => {
+                setMessage(false)
+            }, 4000);
+        }
+    }
+
     return (
         <div className='w-full'>
         <div className='w-full flex items-center justify-center'>
             <div className='w-[700px] p-7 bg-slate-100 rounded-lg shadow-lg'>
+                <div className='w-1/2 text-center mx-auto my-3'>
+                {message && messageContent && <p className='bg-white text-center p-1 rounded-lg'>{messageContent}</p>}
+                </div>
                 <div className='flex items-center justify-between'>
                     <div>
                         <ul className='flex flex-col gap-2'>
@@ -92,7 +115,7 @@ const DetailsPage : React.FC = () => {
                                 <p>{data.location.zip_code}</p>
                             </li>
                             <li className='flex gap-3'>
-                                <ButtonComponent onClick={() => {}}>Add to plan</ButtonComponent>
+                                {googleSearchMap && googleSearchMap.place_results && googleSearchMap.place_results.data_id && <ButtonComponent onClick={handleAddPlan}>Add to plan</ButtonComponent>}
                                 {googleSearchMap && googleSearchMap.search_metadata && googleSearchMap.search_metadata.google_maps_url && <ButtonComponent onClick={() => {}}><a href={`${googleSearchMap.search_metadata.google_maps_url}`}>Get Directions</a></ButtonComponent>}
                             </li>
                         </ul>
