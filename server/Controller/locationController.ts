@@ -28,6 +28,7 @@ export const postLocation = async (req: Request, res: Response) => {
             data: newLocation
         })
     } catch (error) {
+        console.log(error)
         res.status(400).json({
             "Response": res.statusCode,
             "Error message": error

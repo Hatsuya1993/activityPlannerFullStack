@@ -4,13 +4,11 @@ import {LocationInterface} from '../Interface/locationInterface'
 const locationSchema = new Schema<LocationInterface>({
     uid: {
         type: String,
-        require: true,
-        unique: true
+        required: true,
     },
     data_id: {
         type: String,
         required: true,
-        unique: true
     },
     name: {
         type: String,
