@@ -14,6 +14,7 @@ export const getLocations = async () => {
 export const postLocation = async (info : LocationInterface) => {
     try {
         const data = await axios.post('http://localhost:8200/newLocation', {
+            uid: info.uid,
             data_id: info.data_id,
             name: info.name,
             latitude: info.latitude,

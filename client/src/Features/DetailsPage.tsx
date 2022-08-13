@@ -3,12 +3,14 @@ import { useLocation } from 'react-router-dom';
 import ButtonComponent from '../Components/ButtonComponent';
 import ReviewsComponent from '../Components/ReviewsComponent';
 import RowComponents from '../Components/RowComponents';
+import { useAuth } from '../Context/authContext';
 import { actionType } from '../Redux/reducer';
 import { useStateValue } from '../Redux/StateProvider';
 import { postLocation } from '../Utils/fetchLocations';
 import { searchByMap, searchLocation, searchReviews } from '../Utils/fetchSearchGoogle';
 
 const DetailsPage : React.FC = () => {
+    const {currentUser} = useAuth()
     const [{googleSearchResponseData, googleSearchMap, loading, googleSearchReviews}, dispatch] = useStateValue()
     const [message, setMessage] = React.useState(false)
     const [messageContent, setMessageContent] = React.useState('')
@@ -66,7 +68,7 @@ const DetailsPage : React.FC = () => {
 
     const handleAddPlan = async () => {
         try {
-            await postLocation({name: data.name, latitude: data.coordinates.latitude, longitude: data.coordinates.longitude, data_id: googleSearchMap.place_results.data_id})
+            await postLocation({uid: currentUser.uid, name: data.name, latitude: data.coordinates.latitude, longitude: data.coordinates.longitude, data_id: googleSearchMap.place_results.data_id})
             setMessage(true)
             setMessageContent('Successfully added to plan')
             setTimeout(() => {

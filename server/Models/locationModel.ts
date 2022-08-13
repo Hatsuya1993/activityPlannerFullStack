@@ -2,6 +2,11 @@ import {Schema, model} from 'mongoose'
 import {LocationInterface} from '../Interface/locationInterface'
 
 const locationSchema = new Schema<LocationInterface>({
+    uid: {
+        type: String,
+        require: true,
+        unique: true
+    },
     data_id: {
         type: String,
         required: true,
