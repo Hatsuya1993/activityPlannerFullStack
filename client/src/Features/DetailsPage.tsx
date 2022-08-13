@@ -5,7 +5,7 @@ import ReviewsComponent from '../Components/ReviewsComponent';
 import RowComponents from '../Components/RowComponents';
 import { actionType } from '../Redux/reducer';
 import { useStateValue } from '../Redux/StateProvider';
-import { getLocations, postLocation } from '../Utils/fetchLocations';
+import { postLocation } from '../Utils/fetchLocations';
 import { searchByMap, searchLocation, searchReviews } from '../Utils/fetchSearchGoogle';
 
 const DetailsPage : React.FC = () => {
