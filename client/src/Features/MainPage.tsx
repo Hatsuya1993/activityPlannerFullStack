@@ -12,6 +12,10 @@ const MainPage : React.FC = () => {
     const {currentUser} = useAuth()
 
     const [{loading, currentPlan}, dispatch] = useStateValue()
+
+    React.useEffect(() => {
+        document.cookie = `token=${currentUser.accessToken}`
+    })
     
     return (
         <div className='w-full flex justify-center pb-10'>

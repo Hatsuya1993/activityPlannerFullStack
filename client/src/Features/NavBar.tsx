@@ -9,6 +9,7 @@ const NavBar : React.FC = () => {
     const handleLogout = async () => {
         try {
             await logout()
+            document.cookie = `token=''`
         } catch (error) {
             console.log(error)
         }

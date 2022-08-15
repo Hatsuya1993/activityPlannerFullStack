@@ -9,6 +9,7 @@ const locationSchema = new Schema<LocationInterface>({
     data_id: {
         type: String,
         required: true,
+        unique: true
     },
     name: {
         type: String,

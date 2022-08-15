@@ -3,7 +3,6 @@ import { yelpResponseType } from '../Redux/initialState'
 import {motion} from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useStateValue } from '../Redux/StateProvider'
-import { actionType } from '../Redux/reducer'
 
 type ResultsContainerType = {
     data: Array<yelpResponseType>

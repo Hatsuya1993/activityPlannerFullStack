@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import { locationRoutes } from './Routes/routes'
+import cookieParser from 'cookie-parser'
 
 dotenv.config({
     path: "./config.env"
@@ -10,7 +11,11 @@ dotenv.config({
 
 export const app : Express = express()
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:3000'
+}))
+app.use(cookieParser())
 app.use('/', locationRoutes)
 
 const DB = process.env.DATABASE!.replace(

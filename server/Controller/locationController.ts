@@ -1,9 +1,9 @@
-import {Request,Response} from 'express'
+import {Request,Response,NextFunction} from 'express'
 import {Error} from 'mongoose'
 import { LocationInterface } from '../Interface/locationInterface'
 import { Location } from '../Models/locationModel'
 
-export const getLocations = async (req: Request, res: Response) => {
+export const getLocations = async (req: Request, res: Response, next: NextFunction) => {
     Location.find({}, (err: Error, result: Array<LocationInterface>) => {
         if(err){
             res.json({
@@ -46,6 +46,26 @@ export const deleteLocation = async (req: Request, res: Response) => {
         res.status(400).json({
             "Response": res.statusCode,
             "Error message": error
+        })
+    }
+}
+
+export const auth = (req: Request, res: Response, next: NextFunction) => {
+    const token = req.cookies
+    const headerToken = req.headers
+    if(!token.token || !headerToken.token){
+        return res.json({
+            "Response": res.statusCode,
+            "Error message": "Not Authenticated",
+        })
+    }
+    if (token.token === headerToken.token) {
+        next()
+    }
+    else{
+        return res.json({
+            "Response": res.statusCode,
+            "Error message": "Not Authenticated",
         })
     }
 }
