@@ -5,6 +5,7 @@ import OptionsMenu from './OptionsMenu';
 import ResultsContainer from './ResultsContainer';
 import emptyResults from '../Img/emptyResults.png'
 import SearchContainer from './SearchContainer';
+import { CircularProgress } from '@chakra-ui/react';
 
 const MainPage : React.FC = () => {
 
@@ -26,7 +27,7 @@ const MainPage : React.FC = () => {
             <SearchContainer />
             </div>
             <div className='w-full'> 
-            {loading ? <p>Loading...</p> : currentPlan?.length > 0 ? (
+            {loading ? <div className='text-center'><CircularProgress isIndeterminate color='orange.400' /></div> : currentPlan?.length > 0 ? (
                 <ResultsContainer data={currentPlan} />
             ): 
             <div className='w-full flex items-center justify-center py-14'>

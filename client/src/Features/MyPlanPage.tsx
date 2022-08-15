@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import noData from '../Img/noData.png'
 import { useStateValue } from '../Redux/StateProvider'
 import { actionType } from '../Redux/reducer'
+import { CircularProgress } from '@chakra-ui/react'
 
 const MyPlanPage : React.FC = () => { 
     const [{myPlanData, loading}, dispatch] = useStateValue()
@@ -39,7 +40,7 @@ const MyPlanPage : React.FC = () => {
     return (
         <div className='w-full h-full'>
             <div className='w-5/6 mx-auto flex flex-col gap-5'>
-                {loading ? <p>Loading...</p> : myPlanData.length > 0 ? myPlanData.map((each : LocationInterface) => (
+                {loading ? <div className='text-center'><CircularProgress isIndeterminate color='orange.400' /></div> : myPlanData.length > 0 ? myPlanData.map((each : LocationInterface) => (
                     <AnimatePresence>
                         <motion.div initial={{ y: 300, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -100, opacity: 0 }} key={each.data_id} className='bg-gray-100 p-3 rounded-lg drop-shadow-lg flex items-center justify-between'>
                         <div>

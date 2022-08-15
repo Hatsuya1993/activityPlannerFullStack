@@ -8,6 +8,7 @@ import { AuthProvider } from './Context/authContext';
 import {StateProvider} from './Redux/StateProvider';
 import { reducer } from './Redux/reducer';
 import { initialState } from './Redux/initialState';
+import { ChakraProvider } from '@chakra-ui/react'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,7 +18,9 @@ root.render(
     <BrowserRouter>
     <AuthProvider>
     <StateProvider reducer={reducer} initialState={initialState}>
+    <ChakraProvider>
     <App />
+    </ChakraProvider>
     </StateProvider>
     </AuthProvider>
     </BrowserRouter>

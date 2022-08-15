@@ -1,3 +1,4 @@
+import { CircularProgress } from '@chakra-ui/react';
 import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
 import ButtonComponent from '../Components/ButtonComponent';
@@ -99,7 +100,7 @@ const DetailsPage : React.FC = () => {
                             <li>
                             <p>Available : </p>
                             <div className='flex flex-col'>
-                            {loading ? <p>Loading...</p> : googleSearchResponseData && googleSearchResponseData.knowledge_graph ? googleSearchResponseData.knowledge_graph.hours && Object.keys(googleSearchResponseData.knowledge_graph.hours).map((each) => (
+                            {loading ? <CircularProgress size='25px' isIndeterminate color='orange.400' /> : googleSearchResponseData && googleSearchResponseData.knowledge_graph ? googleSearchResponseData.knowledge_graph.hours && Object.keys(googleSearchResponseData.knowledge_graph.hours).map((each) => (
                                         <div key={each} className={each}>{each} : {googleSearchResponseData.knowledge_graph.hours[each].opens} - {googleSearchResponseData.knowledge_graph.hours[each].closes}</div>
                             )) : data.is_closed ? <p>Closed</p> : <p>Open</p>}
                             </div>
