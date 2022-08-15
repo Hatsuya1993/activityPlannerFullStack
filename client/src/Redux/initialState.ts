@@ -50,7 +50,8 @@ export interface localResults {
 }
 
 export interface imagesResponse {
-    thumbnail: string
+    thumbnail: string,
+    title: string
 }
 
 export interface placeResults {

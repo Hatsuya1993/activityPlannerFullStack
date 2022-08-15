@@ -94,13 +94,13 @@ const DetailsPage : React.FC = () => {
                     <div>
                         <ul className='flex flex-col gap-2'>
                             <li>
-                            <p>Store : {data.name}</p>
+                            <p>Store : <span className='text-xl'>{data.name}</span></p>
                             </li>
                             <li>
                             <p>Available : </p>
                             <div className='flex flex-col'>
                             {loading ? <p>Loading...</p> : googleSearchResponseData && googleSearchResponseData.knowledge_graph ? googleSearchResponseData.knowledge_graph.hours && Object.keys(googleSearchResponseData.knowledge_graph.hours).map((each) => (
-                                        <div className={each}>{each} : {googleSearchResponseData.knowledge_graph.hours[each].opens} - {googleSearchResponseData.knowledge_graph.hours[each].closes}</div>
+                                        <div key={each} className={each}>{each} : {googleSearchResponseData.knowledge_graph.hours[each].opens} - {googleSearchResponseData.knowledge_graph.hours[each].closes}</div>
                             )) : data.is_closed ? <p>Closed</p> : <p>Open</p>}
                             </div>
                             </li>
