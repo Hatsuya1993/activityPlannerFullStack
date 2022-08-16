@@ -69,7 +69,7 @@ const DetailsPage : React.FC = () => {
 
     const handleAddPlan = async () => {
         try {
-            await postLocation({uid: currentUser.uid, name: data.name, latitude: data.coordinates.latitude, longitude: data.coordinates.longitude, data_id: googleSearchMap.place_results.data_id}, currentUser.accessToken)
+            await postLocation({uid: currentUser.uid, name: data.name, latitude: data.coordinates.latitude, longitude: data.coordinates.longitude, data_id: googleSearchMap.place_results.data_id, yelpData: data}, currentUser.accessToken)
             setMessage(true)
             setMessageContent('Successfully added to plan')
             setTimeout(() => {

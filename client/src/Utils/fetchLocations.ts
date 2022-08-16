@@ -1,5 +1,6 @@
 import axios from "axios";
 import {LocationInterface} from "../../../server/Interface/locationInterface"
+import { yelpResponseType } from "../Redux/initialState";
 
 export const getLocations = async (userToken: string) => {
     try {
@@ -23,7 +24,8 @@ export const postLocation = async (info : LocationInterface, userToken: string) 
             data_id: info.data_id,
             name: info.name,
             latitude: info.latitude,
-            longitude: info.longitude
+            longitude: info.longitude,
+            yelpData: info.yelpData
         }, {
             withCredentials: true,
             headers: {

@@ -9,6 +9,7 @@ import { useStateValue } from '../Redux/StateProvider'
 import { actionType } from '../Redux/reducer'
 import { CircularProgress } from '@chakra-ui/react'
 import { useAuth } from '../Context/authContext'
+import { Link } from 'react-router-dom'
 
 const MyPlanPage : React.FC = () => { 
     const {currentUser} = useAuth()
@@ -47,7 +48,9 @@ const MyPlanPage : React.FC = () => {
                     <AnimatePresence>
                         <motion.div initial={{ y: 300, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -100, opacity: 0 }} key={each.data_id} className='bg-gray-100 p-3 rounded-lg drop-shadow-lg flex items-center justify-between'>
                         <div>
-                        <p>{each.name}</p>
+                        <Link to={`/detail`} state={each.yelpData}>
+                        <motion.p className='bg-white p-1 rounded-lg' whileTap={{scale: 0.8}}>{each.name}</motion.p>
+                        </Link>           
                         </div>
                         <ul className='flex items-center gap-2'>
                             <motion.li whileTap={{scale: 0.9}} className='cursor-pointer flex items-center gap-1 bg-white p-1 rounded-lg'>Directions <span><MdGpsFixed /></span></motion.li>
@@ -55,7 +58,7 @@ const MyPlanPage : React.FC = () => {
                         </ul>
                         </motion.div>
                     </AnimatePresence>
-                    </div>                    
+                    </div>         
                 )) : <div className='w-full'>
                 <img className='w-[150px] h-[150px] mx-auto' src={`${noData}`} alt=''/>
                 </div>}

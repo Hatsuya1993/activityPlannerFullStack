@@ -22,6 +22,10 @@ const locationSchema = new Schema<LocationInterface>({
     longitude: {
         type: Number,
         required: true
+    },
+    yelpData: {
+        type: Object,
+        required: true
     }
 })
 
