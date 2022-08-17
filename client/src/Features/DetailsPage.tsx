@@ -85,13 +85,13 @@ const DetailsPage : React.FC = () => {
     }
 
     return (
-        <div className='w-full'>
-        <div className='w-full flex items-center justify-center'>
-            <div className='w-[700px] p-7 bg-slate-100 rounded-lg shadow-lg'>
+        <div className='w-full flex flex-col gap-5'>
+        <div className='w-full flex items-center justify-center md:p-4'>
+            <div className='bg-slate-100 rounded-lg shadow-lg md:px-5 px-5'>
                 <div className='w-1/2 text-center mx-auto my-3'>
                 {message && messageContent && <p className='bg-white text-center p-1 rounded-lg'>{messageContent}</p>}
                 </div>
-                <div className='flex items-center justify-between'>
+                <div className='flex flex-col md:flex-row gap-5 py-4 items-center justify-between'>
                     <div>
                         <ul className='flex flex-col gap-2'>
                             <li>
@@ -117,14 +117,14 @@ const DetailsPage : React.FC = () => {
                                 <p>{data.location.address1}</p>
                                 <p>{data.location.zip_code}</p>
                             </li>
-                            <li className='flex gap-3'>
+                            <li className='flex flex-col md:flex-row gap-3'>
                                 {googleSearchMap && googleSearchMap.place_results && googleSearchMap.place_results.data_id && <ButtonComponent onClick={handleAddPlan}>Add to plan</ButtonComponent>}
                                 {googleSearchMap && googleSearchMap.search_metadata && googleSearchMap.search_metadata.google_maps_url && <ButtonComponent onClick={() => {}}><a href={`${googleSearchMap.search_metadata.google_maps_url}`}>Get Directions</a></ButtonComponent>}
                             </li>
                         </ul>
                     </div>
                     <div className=''>
-                        <img className='w-80 h-80 rounded-lg' src={`${data.image_url}`} alt="" />
+                        <img className='w-80 h-72 md:w-80 md:h-72 rounded-lg mx-auto' src={`${data.image_url}`} alt="" />
                     </div>
                 </div>
             </div>

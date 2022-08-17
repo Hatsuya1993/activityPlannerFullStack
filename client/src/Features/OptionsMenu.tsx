@@ -53,7 +53,7 @@ const OptionsMenu : React.FC = () => {
     }
     return (
         <div className='w-full'>
-                <div className='w-full flex items-center justify-between'>
+                <div className='w-full gap-4 flex flex-wrap items-center justify-between'>
                     {activity.map(each => {
                         return (
                             <motion.div onClick={() => handleCurrentPlan(each)} key={each.id} whileTap={{scale: 0.75}} className={`${each.type === currentPlan ? 'bg-orange-600' : 'bg-gray-100'}  h-28 w-24 p-3 flex flex-col items-center justify-center rounded-lg shadow-lg cursor-pointer`}>
