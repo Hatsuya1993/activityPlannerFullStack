@@ -53,7 +53,6 @@ const MyPlanPage : React.FC = () => {
                         </Link>           
                         </div>
                         <ul className='flex items-center gap-2'>
-                            <motion.li whileTap={{scale: 0.9}} className='cursor-pointer flex items-center gap-1 bg-white p-1 rounded-lg'>Directions <span><MdGpsFixed /></span></motion.li>
                             <motion.li onClick={() => handleDone(each.data_id )} whileTap={{scale: 0.9}} className='cursor-pointer flex items-center gap-1 bg-white p-1 rounded-lg'>Done <span><TiTick /></span></motion.li>
                         </ul>
                         </motion.div>
