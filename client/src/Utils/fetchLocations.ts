@@ -1,10 +1,10 @@
 import axios from "axios";
 import {LocationInterface} from "../../../server/Interface/locationInterface"
-import { yelpResponseType } from "../Redux/initialState";
+import { HEROKU_SERVER } from "../secret";
 
 export const getLocations = async (userToken: string) => {
     try {
-        const data = await axios.get('http://localhost:8200/locations', {
+        const data = await axios.get(`${HEROKU_SERVER}locations`, {
             withCredentials: true,
             headers: {
                 "token": userToken
@@ -19,7 +19,7 @@ export const getLocations = async (userToken: string) => {
 
 export const postLocation = async (info : LocationInterface, userToken: string) => {
     try {
-        const data = await axios.post('http://localhost:8200/newLocation', {
+        const data = await axios.post(`${HEROKU_SERVER}newLocation`, {
             uid: info.uid,
             data_id: info.data_id,
             name: info.name,
@@ -40,7 +40,7 @@ export const postLocation = async (info : LocationInterface, userToken: string) 
 
 export const deleteLocation = async (id: string, userToken: string) => {
     try {
-        await axios.delete(`http://localhost:8200/deleteLocation/${id}`, {
+        await axios.delete(`${HEROKU_SERVER}deleteLocation/${id}`, {
             withCredentials: true,
             headers: {
                 "token": userToken

@@ -51,21 +51,21 @@ export const deleteLocation = async (req: Request, res: Response) => {
 }
 
 export const auth = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.cookies
-    const headerToken = req.headers
-    if(!token.token || !headerToken.token){
-        return res.json({
-            "Response": res.statusCode,
-            "Error message": "Not Authenticated",
-        })
-    }
-    if (token.token === headerToken.token) {
+    // const token = req.cookies
+    // const headerToken = req.headers
+    // if(!token.token || !headerToken.token){
+    //     return res.json({
+    //         "Response": res.statusCode,
+    //         "Error message": "Not Authenticated",
+    //     })
+    // }
+    // if (token.token === headerToken.token) {
         next()
-    }
-    else{
-        return res.json({
-            "Response": res.statusCode,
-            "Error message": "Not Authenticated",
-        })
-    }
+    // }
+    // else{
+    //     return res.json({
+    //         "Response": res.statusCode,
+    //         "Error message": "Not Authenticated",
+    //     })
+    // }
 }
