@@ -1,10 +1,9 @@
 import axios from "axios";
 import {LocationInterface} from "../../../server/Interface/locationInterface"
-import { HEROKU_SERVER } from "../secret";
 
 export const getLocations = async (userToken: string) => {
     try {
-        const data = await axios.get(`${HEROKU_SERVER}locations`, {
+        const data = await axios.get(`${process.env.REACT_APP_HEROKU_SERVER}locations`, {
             withCredentials: true,
             headers: {
                 "token": userToken
@@ -19,7 +18,7 @@ export const getLocations = async (userToken: string) => {
 
 export const postLocation = async (info : LocationInterface, userToken: string) => {
     try {
-        const data = await axios.post(`${HEROKU_SERVER}newLocation`, {
+        const data = await axios.post(`${process.env.REACT_APP_HEROKU_SERVER}newLocation`, {
             uid: info.uid,
             data_id: info.data_id,
             name: info.name,
@@ -40,7 +39,7 @@ export const postLocation = async (info : LocationInterface, userToken: string) 
 
 export const deleteLocation = async (id: string, userToken: string) => {
     try {
-        await axios.delete(`${HEROKU_SERVER}deleteLocation/${id}`, {
+        await axios.delete(`${process.env.REACT_APP_HEROKU_SERVER}deleteLocation/${id}`, {
             withCredentials: true,
             headers: {
                 "token": userToken
