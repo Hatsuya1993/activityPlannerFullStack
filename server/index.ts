@@ -13,7 +13,7 @@ export const app : Express = express()
 app.use(express.json())
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000'
+    origin: process.env.SERVER || 'http://localhost:3000'
 }))
 app.use(cookieParser())
 app.use('/', locationRoutes)
@@ -35,8 +35,8 @@ app.get('/', (req, res) => {
     res.send('Hello World')
 })
 
-const port = process.env.PORT
+const port = process.env.PORT || 8200
 
 app.listen(port, () => {
-    console.log(`[Server]: Server is running at https://localhost:${port}`)
+    console.log(`[Server]: Server is running`)
 })
