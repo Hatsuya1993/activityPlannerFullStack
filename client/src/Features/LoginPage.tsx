@@ -14,7 +14,7 @@ const LoginPage : React.FC = () => {
         password: ""
     })
 
-    const {login, currentUser} = useAuth()
+    const {login, currentUser, signup} = useAuth()
 
     useEffect(() => {
         const checkUserLogin = () => {
@@ -55,6 +55,32 @@ const LoginPage : React.FC = () => {
         }
     }
 
+    const handleRegister = async () => {
+        try {
+            if(userDetails.email === '' || userDetails.password === '') {
+                setMessage(true)
+                setMessageContent("Please fill up all details")
+                setTimeout(() => {
+                    setMessage(false)
+                    setMessageContent("")
+                }, 5000)
+            }
+            else{
+                const registerData = await signup(userDetails.email, userDetails.password)
+                clearDetails()
+                navigate('/')
+            }
+        } catch (error) {
+            console.log(error)
+            setMessage(true)
+            setMessageContent("Register Error")
+            setTimeout(() => {
+                setMessage(false)
+                setMessageContent("")
+            }, 5000)
+        }
+    }
+
     const clearDetails = () => {
         setUserDetails({
             email: "",
@@ -73,7 +99,7 @@ const LoginPage : React.FC = () => {
                     </div>
                     <div className='flex flex-col gap-3'>
                     <ButtonComponent onClick={handleLogin}>Login</ButtonComponent>
-                    <ButtonComponent onClick={() => {}}>Don't have an account ?</ButtonComponent>
+                    <ButtonComponent onClick={handleRegister}>Don't have an account ?</ButtonComponent>
                     </div>
                 </div>
             </div>
