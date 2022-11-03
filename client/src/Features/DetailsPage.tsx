@@ -7,8 +7,8 @@ import RowComponents from '../Components/RowComponents';
 import { useAuth } from '../Context/authContext';
 import { actionType } from '../Redux/reducer';
 import { useStateValue } from '../Redux/StateProvider';
-import { postLocation } from '../Utils/fetchLocations';
 import { searchByMap, searchLocation, searchReviews } from '../Utils/fetchSearchGoogle';
+import { saveItem } from '../Utils/firebaseFunctions';
 
 const DetailsPage : React.FC = () => {
     const {currentUser} = useAuth()
@@ -69,7 +69,8 @@ const DetailsPage : React.FC = () => {
 
     const handleAddPlan = async () => {
         try {
-            await postLocation({uid: currentUser.uid, name: data.name, latitude: data.coordinates.latitude, longitude: data.coordinates.longitude, data_id: googleSearchMap.place_results.data_id, yelpData: data}, currentUser.accessToken)
+            const addPlanData = {uid: currentUser.uid, name: data.name, latitude: data.coordinates.latitude, longitude: data.coordinates.longitude, data_id: googleSearchMap.place_results.data_id, yelpData: data}
+            saveItem(addPlanData)
             setMessage(true)
             setMessageContent('Successfully added to plan')
             setTimeout(() => {

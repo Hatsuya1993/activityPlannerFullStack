@@ -1,30 +1,27 @@
 import React, { useEffect } from 'react'
 import { LocationInterface } from '../../../server/Interface/locationInterface'
-import { deleteLocation, getLocations } from '../Utils/fetchLocations'
-import {MdGpsFixed} from 'react-icons/md' 
 import {TiTick} from 'react-icons/ti'
 import { AnimatePresence, motion } from 'framer-motion'
 import noData from '../Img/noData.png'
 import { useStateValue } from '../Redux/StateProvider'
 import { actionType } from '../Redux/reducer'
 import { CircularProgress } from '@chakra-ui/react'
-import { useAuth } from '../Context/authContext'
 import { Link } from 'react-router-dom'
+import { deleteItem, getAllItems } from '../Utils/firebaseFunctions'
 
 const MyPlanPage : React.FC = () => { 
-    const {currentUser} = useAuth()
     const [{myPlanData, loading}, dispatch] = useStateValue()
     useEffect(() => {
-        fetchData()
         dispatch({
             type: actionType.SET_LOADING,
             loading: true
         }) 
+        fetchData()
         async function fetchData() {
-            const response = await getLocations(currentUser.accessToken)
+            const response = await getAllItems()
             dispatch({
                 type: actionType.SET_MY_PLAN_DATA,
-                myPlanData: response.data
+                myPlanData: response
             })
         }
         dispatch({
@@ -38,7 +35,7 @@ const MyPlanPage : React.FC = () => {
             type: actionType.SET_MY_PLAN_DATA,
             myPlanData: data
         })
-        await deleteLocation(id, currentUser.accessToken)
+        await deleteItem(id)
     }
     return (
         <div className='w-full h-full'>
