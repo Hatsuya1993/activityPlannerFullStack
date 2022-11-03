@@ -11,7 +11,6 @@ import { dataType, deleteItem, getAllItems } from '../Utils/firebaseFunctions'
 const MyPlanPage : React.FC = () => { 
     const [{myPlanData, loading}, dispatch] = useStateValue()
     useEffect(() => {
-        console.log(myPlanData)
         dispatch({
             type: actionType.SET_LOADING,
             loading: true
