@@ -7,17 +7,23 @@ import { actionType } from '../Redux/reducer'
 import { CircularProgress } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { dataType, deleteItem, getAllItems } from '../Utils/firebaseFunctions'
+import { useAuth } from '../Context/authContext'
 
 const MyPlanPage : React.FC = () => { 
+    const {currentUser} = useAuth()
     const [{myPlanData, loading}, dispatch] = useStateValue()
     useEffect(() => {
+        dispatch({
+            type: actionType.SET_MY_PLAN_DATA,
+            myPlanData: []
+        })
         dispatch({
             type: actionType.SET_LOADING,
             loading: true
         }) 
         fetchData()
         async function fetchData() {
-            const response = await getAllItems()
+            const response = await getAllItems(currentUser.uid)
             dispatch({
                 type: actionType.SET_MY_PLAN_DATA,
                 myPlanData: response

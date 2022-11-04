@@ -19,9 +19,9 @@ export const saveItem = async (data: dataType) => {
     await setDoc(doc(firestore, 'saveStore', data.data_id), data, {merge: true})
 }
 
-export const getAllItems = async () => {
+export const getAllItems = async (uid: string) => {
     const items = await getDocs(query(collection(firestore, 'saveStore')))
-    return items.docs.map((doc) => doc.data())
+    return items.docs.map((doc) => doc.data()).filter((each) => each.uid === uid)
 }
 
 export const deleteItem = async (data_id: string) => {
