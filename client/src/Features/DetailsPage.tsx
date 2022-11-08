@@ -5,6 +5,7 @@ import ButtonComponent from '../Components/ButtonComponent';
 import ReviewsComponent from '../Components/ReviewsComponent';
 import RowComponents from '../Components/RowComponents';
 import { useAuth } from '../Context/authContext';
+import { myPlanDataType } from '../Redux/initialState';
 import { actionType } from '../Redux/reducer';
 import { useStateValue } from '../Redux/StateProvider';
 import { searchByMap, searchLocation, searchReviews } from '../Utils/fetchSearchGoogle';
@@ -12,7 +13,7 @@ import { saveItem } from '../Utils/firebaseFunctions';
 
 const DetailsPage : React.FC = () => {
     const {currentUser} = useAuth()
-    const [{googleSearchResponseData, googleSearchMap, loading, googleSearchReviews}, dispatch] = useStateValue()
+    const [{myPlanData, googleSearchResponseData, googleSearchMap, loading, googleSearchReviews}, dispatch] = useStateValue()
     const [message, setMessage] = React.useState(false)
     const [messageContent, setMessageContent] = React.useState('')
     const location = useLocation();
@@ -67,9 +68,15 @@ const DetailsPage : React.FC = () => {
         fetchData();
     }, [])
 
-    const handleAddPlan = async () => {
+    const handleAddPlan = async () => {        
         try {
+            const checkForDuplicate = myPlanData.some((each: myPlanDataType) => each.name === data.name)
+            if(checkForDuplicate) throw new Error('Plan already added')
             const addPlanData = {uid: currentUser.uid, name: data.name, latitude: data.coordinates.latitude, longitude: data.coordinates.longitude, data_id: googleSearchMap.place_results.data_id, yelpData: data}
+            dispatch({
+                type: actionType.SET_MY_PLAN_DATA,
+                myPlanData: [...myPlanData, addPlanData]
+            })
             saveItem(addPlanData)
             setMessage(true)
             setMessageContent('Successfully added to plan')

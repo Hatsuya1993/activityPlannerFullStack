@@ -6,6 +6,8 @@ import ResultsContainer from './ResultsContainer';
 import emptyResults from '../Img/emptyResults.png'
 import SearchContainer from './SearchContainer';
 import { CircularProgress } from '@chakra-ui/react';
+import { actionType } from '../Redux/reducer';
+import { getAllItems } from '../Utils/firebaseFunctions';
 
 const MainPage : React.FC = () => {
 
@@ -14,8 +16,15 @@ const MainPage : React.FC = () => {
     const [{loading, currentPlan}, dispatch] = useStateValue()
 
     React.useEffect(() => {
-        document.cookie = `token=${currentUser.accessToken}`
-    })
+        async function fetchData() {
+            const response = await getAllItems(currentUser.uid)
+            dispatch({
+                type: actionType.SET_MY_PLAN_DATA,
+                myPlanData: response
+            })
+        }
+        fetchData()
+    }, [])
     
     return (
         <div className='w-full flex justify-center pb-10'>

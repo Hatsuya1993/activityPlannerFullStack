@@ -14,13 +14,13 @@ const MyPlanPage : React.FC = () => {
     const [{myPlanData, loading}, dispatch] = useStateValue()
     useEffect(() => {
         dispatch({
-            type: actionType.SET_MY_PLAN_DATA,
-            myPlanData: []
-        })
-        dispatch({
             type: actionType.SET_LOADING,
             loading: true
         }) 
+        dispatch({
+            type: actionType.SET_MY_PLAN_DATA,
+            myPlanData: []
+        })
         fetchData()
         async function fetchData() {
             const response = await getAllItems(currentUser.uid)
